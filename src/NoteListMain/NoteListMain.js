@@ -37,8 +37,7 @@ export default class NoteListMain extends React.Component {
             tag={Link}
             to='/add-note'
             type='button'
-            className='NoteListMain__add-note-button'
-          >
+            className='NoteListMain__add-note-button'>
             <FontAwesomeIcon icon='plus' />
             <br />
             Note
