@@ -77,7 +77,7 @@ class AddNote extends React.Component {
     }
 }
 
-AddNotes.propTypes = {
+AddNote.propTypes = {
     name: PropTypes.string,
     value: PropTypes.string,
     touched: PropTypes.boolean

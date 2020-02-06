@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 
 
-class NewFolder extends React.Component {
+class AddFolder extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -78,4 +78,4 @@ AddFolder.propTypes = {
     touched: PropTypes.boolean
 };
 
-export default NewFolder;
+export default AddFolder;
