@@ -1,4 +1,6 @@
-class ErrorBoundary extends React.Component {
+import React from 'react'
+
+export default class ErrorBoundary extends React.Component {
     constructor(props) {
       super(props);
       this.state = { hasError: false };
@@ -11,7 +13,7 @@ class ErrorBoundary extends React.Component {
   
     componentDidCatch(error, errorInfo) {
       // You can also log the error to an error reporting service
-      logErrorToMyService(error, errorInfo);
+      console.log(error, errorInfo);
     }
   
     render() {

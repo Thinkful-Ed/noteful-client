@@ -1,44 +1,50 @@
 import React, { Component } from "react";
-//import ApiContext from '../ApiContext'
-//import config from '../config'
+import ApiContext from "../ApiContext";
+import config from "../config";
 
 export default class AddNote extends Component {
- // static contextType = ApiContext;
+  static contextType = ApiContext;
   state = {
-    addNote: ""
+    name: '',
+    content: '',
+    folderId: ''
+
   };
 
   handleChange = (e) => {
     this.setState({
-      addNote: e.currentTarget.value
+      [e.currentTarget.name]: e.currentTarget.value
     });
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    // fetch(`${config.API_ENDPOINT}/notes`, {
-    //   method: "POST",
-    //   headers: {
-    //     "content-type": "application/json"
-    //   },
-    //   body: JSON.stringify({
-    //     name: this.state.noteName
-        
-    //   })
-    // })
-    //   .then((res) => {
-    //     if (!res.ok) return res.json().then((e) => Promise.reject(e));
-    //     return res.json();
-    //   })
-    //   .then((note) => {
-    //     console.log(note);
-    //     this.context.addNote(note);
-    //     this.props.history.push(`/notes/${note.id}`);
-    //   })
+    fetch(`${config.API_ENDPOINT}/notes`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({
+        name: this.state.name,
+        content: this.state.content,
+        folderId: this.state.folderId,
+        modified: new Date()
+      })
 
-    //   .catch((error) => {
-    //     console.error({ error });
-    //   });
+    })
+      .then((res) => {
+        if (!res.ok) return res.json().then((e) => Promise.reject(e));
+        return res.json();
+      })
+      .then((note) => {
+        // console.log(note);
+        this.context.addNote(note);
+        this.props.history.push(`/note/${note.id}`);
+      })
+
+      .catch((error) => {
+        console.error({ error });
+      });
   };
 
   render() {
@@ -47,16 +53,31 @@ export default class AddNote extends Component {
         <h2>Add Note</h2>
         <form onSubmit={this.handleSubmit} className="AddNote">
           <label>
-            {" "}
-            Add Note:{" "}
+            Name:{" "}
             <input
               type="text"
-              onChange={this.handleChange}
-              value={this.state.addNote}
+              onChange={this.handleChange} 
+              value={this.state.name}
+              name='name'
               required
-            />
-            <input type="submit" value="submit" />
+            /> <br />
           </label>
+          <label>Content:{" "}
+            <input type="text" onChange={this.handleChange}  value={this.state.content} name='content' required/> 
+          </label> <br />
+          <label>
+          Folder:
+          <select name='folderId' value={this.state.value} onChange={this.handleChange} required >
+            <option value =''></option>
+            {
+              this.context.folders.map((folder) => (
+                <option value={folder.id}>{folder.name}</option>
+              ))
+            }
+    
+          </select>
+        </label>
+          <input type="submit" value="submit" />
         </form>
       </>
     );
