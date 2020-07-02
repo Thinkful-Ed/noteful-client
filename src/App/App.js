@@ -9,12 +9,14 @@ import AddFolder from '../AddFolder/AddFolder'
 import AddNote from '../AddNote/AddNote'
 import ApiContext from '../ApiContext'
 import config from '../config'
+import Error from '../Error/Error';
 import './App.css'
 
 class App extends Component {
   state = {
     notes: [],
     folders: [],
+    touch: false
   };
 
   componentDidMount() {
@@ -41,12 +43,27 @@ class App extends Component {
       })
   }
 
+  validateNote(){
+    const note = this.state.notes.value.trim();
+    if (note.length === 0){
+      return "Note is required";
+    }
+  }
+
+  validateFolder(){
+    const folder = this.state.folders.value.trim();
+    if (folder.length === 0){
+      return "Folder is required";
+    }
+  }
+
   handleAddFolder = folder => {
     this.setState({
       folders: [
         ...this.state.folders,
         folder
-      ]
+      ],
+      touch: true
     })
   }
 
@@ -55,7 +72,8 @@ class App extends Component {
       notes: [
         ...this.state.notes,
         note
-      ]
+      ],
+      touch: true
     })
   }
 
@@ -130,19 +148,21 @@ class App extends Component {
     return (
       <ApiContext.Provider value={value}>
         <div className='App'>
-          <nav className='App__nav'>
-            {this.renderNavRoutes()}
-          </nav>
-          <header className='App__header'>
-            <h1>
-              <Link to='/'>Noteful</Link>
-              {' '}
-              <FontAwesomeIcon icon='check-double' />
-            </h1>
-          </header>
-          <main className='App__main'>
-            {this.renderMainRoutes()}
-          </main>
+          <Error>
+            <nav className='App__nav'>
+              {this.renderNavRoutes()}
+            </nav>
+            <header className='App__header'>
+              <h1>
+                <Link to='/'>Noteful</Link>
+                {' '}
+                <FontAwesomeIcon icon='check-double' />
+              </h1>
+            </header>
+            <main className='App__main'>
+              {this.renderMainRoutes()}
+            </main>
+          </Error>
         </div>
       </ApiContext.Provider>
     )
