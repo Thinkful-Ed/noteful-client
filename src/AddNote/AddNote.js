@@ -14,31 +14,37 @@ export default class AddNote extends Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    const newNote = {
-      name: e.target['note-name'].value,
-      content: e.target['note-content'].value,
-      folderId: e.target['note-folder-id'].value,
-      modified: new Date(),
+    if( e.target['note-name'].value === "" || e.target['note-content'].value === "" || e.target['note-folder-id'].value === ""){
+      return "Note is required."
     }
-    fetch(`${config.API_ENDPOINT}/notes`, {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify(newNote),
-    })
-      .then(res => {
-        if (!res.ok)
-          return res.json().then(e => Promise.reject(e))
-        return res.json()
+    else {
+      const newNote = {
+        name: e.target['note-name'].value,
+        content: e.target['note-content'].value,
+        folderId: e.target['note-folder-id'].value,
+        modified: new Date(),
+      }
+      fetch(`${config.API_ENDPOINT}/notes`, {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify(newNote),
       })
-      .then(note => {
-        this.context.addNote(note)
-        this.props.history.push(`/folder/${note.folderId}`)
-      })
-      .catch(error => {
-        console.error({ error })
-      })
+        .then(res => {
+          if (!res.ok)
+            return res.json().then(e => Promise.reject(e))
+          return res.json()
+        })
+        .then(note => {
+          this.context.addNote(note)
+          this.props.history.push(`/folder/${note.folderId}`)
+        })
+        .catch(error => {
+          console.error({ error })
+        })
+    }
+    
   }
 
   render() {

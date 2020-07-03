@@ -8,7 +8,7 @@ export default class Error extends Component {
         };
     }
 
-    getDerivedStateFromError(error) {
+    static getDerivedStateFromError(error) {
         return{ hasError: true };
     }
 
