@@ -16,7 +16,8 @@ class App extends Component {
   state = {
     notes: [],
     folders: [],
-    touch: false
+    touch: false,
+    errorMessage: "ERROR",
   };
 
   componentDidMount() {
@@ -43,20 +44,6 @@ class App extends Component {
       })
   }
 
-  validateNote(){
-    const note = this.state.notes.value.trim();
-    if (note.length === 0){
-      return "Note is required";
-    }
-  }
-
-  validateFolder(){
-    const folder = this.state.folders.value.trim();
-    if (folder.length === 0){
-      return "Folder is required";
-    }
-  }
-
   handleAddFolder = folder => {
     this.setState({
       folders: [
@@ -80,6 +67,12 @@ class App extends Component {
   handleDeleteNote = noteId => {
     this.setState({
       notes: this.state.notes.filter(note => note.id !== noteId)
+    })
+  }
+
+  addErrorMessage = message => {
+    this.setState({
+      errorMessage : message,
     })
   }
 
@@ -141,9 +134,11 @@ class App extends Component {
     const value = {
       notes: this.state.notes,
       folders: this.state.folders,
+      errorMessage: this.state.errorMessage,
       addFolder: this.handleAddFolder,
       addNote: this.handleAddNote,
       deleteNote: this.handleDeleteNote,
+      addErrorMessage: this.addErrorMessage,
     }
     return (
       <ApiContext.Provider value={value}>

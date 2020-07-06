@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import NotefulForm from '../NotefulForm/NotefulForm'
+import ErrorMessage from '../ErrorMessage'
 import ApiContext from '../ApiContext'
 import config from '../config'
 import './AddNote.css'
@@ -15,7 +16,7 @@ export default class AddNote extends Component {
   handleSubmit = e => {
     e.preventDefault()
     if( e.target['note-name'].value === "" || e.target['note-content'].value === "" || e.target['note-folder-id'].value === ""){
-      return "Note is required."
+      this.context.addErrorMessage("All fields are required");
     }
     else {
       const newNote = {
@@ -78,6 +79,7 @@ export default class AddNote extends Component {
               )}
             </select>
           </div>
+          <ErrorMessage />
           <div className='buttons'>
             <button type='submit'>
               Add note
