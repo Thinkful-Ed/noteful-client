@@ -17,7 +17,6 @@ class App extends Component {
     notes: [],
     folders: [],
     touch: false,
-    errorMessage: "ERROR",
   };
 
   componentDidMount() {
@@ -67,12 +66,6 @@ class App extends Component {
   handleDeleteNote = noteId => {
     this.setState({
       notes: this.state.notes.filter(note => note.id !== noteId)
-    })
-  }
-
-  addErrorMessage = message => {
-    this.setState({
-      errorMessage : message,
     })
   }
 
@@ -134,11 +127,9 @@ class App extends Component {
     const value = {
       notes: this.state.notes,
       folders: this.state.folders,
-      errorMessage: this.state.errorMessage,
       addFolder: this.handleAddFolder,
       addNote: this.handleAddNote,
       deleteNote: this.handleDeleteNote,
-      addErrorMessage: this.addErrorMessage,
     }
     return (
       <ApiContext.Provider value={value}>

@@ -6,6 +6,9 @@ import config from '../config'
 import './AddNote.css'
 
 export default class AddNote extends Component {
+  state = {
+    errorMessage: "",
+  }
   static defaultProps = {
     history: {
       push: () => { }
@@ -16,7 +19,7 @@ export default class AddNote extends Component {
   handleSubmit = e => {
     e.preventDefault()
     if( e.target['note-name'].value === "" || e.target['note-content'].value === "" || e.target['note-folder-id'].value === ""){
-      this.context.addErrorMessage("All fields are required");
+      this.setState({errorMessage: "All fields are required"});
     }
     else {
       const newNote = {
@@ -79,7 +82,7 @@ export default class AddNote extends Component {
               )}
             </select>
           </div>
-          <ErrorMessage />
+          <ErrorMessage errorMessage={this.state.errorMessage} />
           <div className='buttons'>
             <button type='submit'>
               Add note

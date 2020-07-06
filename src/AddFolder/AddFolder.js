@@ -6,6 +6,10 @@ import config from '../config'
 import './AddFolder.css'
 
 export default class AddFolder extends Component {
+  state = {
+    errorMessage: "",
+  }
+
   static defaultProps = {
     history: {
       push: () => { }
@@ -19,7 +23,7 @@ export default class AddFolder extends Component {
       name: e.target['folder-name'].value
     }
     if (folder.name === ""){
-      this.context.addErrorMessage("Folder name is required.")
+      this.setState({errorMessage: "Folder name is required."});
     }
     else {
       fetch(`${config.API_ENDPOINT}/folders`, {
@@ -55,7 +59,7 @@ export default class AddFolder extends Component {
             </label>
             <input type='text' id='folder-name-input' name='folder-name' />
           </div>
-          <ErrorMessage />
+          <ErrorMessage errorMessage={this.state.errorMessage} />
           <div className='buttons'>
             <button type='submit'>
               Add folder
