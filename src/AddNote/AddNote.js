@@ -18,7 +18,7 @@ export default class AddNote extends Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    if( e.target['note-name'].value === "" || e.target['note-content'].value === "" || e.target['note-folder-id'].value === ""){
+    if( e.target['note-name'].value === "" || e.target['note-content'].value === "" || e.target['note-folder-id'].value === "..."){
       this.setState({errorMessage: "All fields are required"});
     }
     else {
