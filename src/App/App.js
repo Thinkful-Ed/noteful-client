@@ -9,7 +9,7 @@ import AddFolder from '../AddFolder/AddFolder'
 import AddNote from '../AddNote/AddNote'
 import ApiContext from '../ApiContext'
 import config from '../config'
-import Error from '../Error/Error';
+import Error from '../Error/Error'
 import './App.css'
 
 class App extends Component {
