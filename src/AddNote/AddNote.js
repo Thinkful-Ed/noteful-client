@@ -7,8 +7,14 @@ export default function AddNote({folders, setNotes}) {
     const [name, setNoteName] = useState('');
     const [content, setNoteContent] = useState('');
     const [error, setError] = useState(false);
-    const [folderId, setFolder] = useState('b0715efe-ffaf-11e8-8eb2-f2801f1b9fd1')
+    const [folderId, setFolder] = useState(folders[0].id)
     let history = useHistory();
+    const validateNoteName = () => {
+        const notename = name.trim();
+        if (notename.length === 0) {
+          return 'A note name is required';
+        }
+    };
     const handleAddNotes = (event) => {
         event.preventDefault()
         let today = new Date(),
@@ -56,7 +62,7 @@ export default function AddNote({folders, setNotes}) {
             }
         </select>
         <br/>
-        <input type="submit" value="Submit" />
+        <input disabled={validateNoteName()} type="submit" value="Submit" />
         {error && <h1>An Error has occured</h1>}
     </form> 
   )
