@@ -5,6 +5,7 @@ import NoteListNav from '../NoteListNav/NoteListNav';
 import NotePageNav from '../NotePageNav/NotePageNav';
 import NoteListMain from '../NoteListMain/NoteListMain';
 import NotePageMain from '../NotePageMain/NotePageMain';
+import AddFolder from '../AddFolder/AddFolder';
 import ApiContext from '../ApiContext';
 import config from '../config';
 import './App.css';
@@ -35,7 +36,10 @@ class App extends Component {
                 console.error({error});
             });
     }
-
+    setFolders = (folder) => {
+        console.log(folder)
+        this.setState({folders: [...this.state.folders, folder]})
+    };
     handleDeleteNote = noteId => {
         this.setState({
             notes: this.state.notes.filter(note => note.id !== noteId)
@@ -72,6 +76,9 @@ class App extends Component {
                     />
                 ))}
                 <Route path="/note/:noteId" component={NotePageMain} />
+                <Route path="/add-folder">
+                    <AddFolder setFolders={this.setFolders}/>
+                </Route>
             </>
         );
     }
