@@ -20,7 +20,7 @@ export default class AddFolder extends Component {
   handleSubmit = e => {
     e.preventDefault()
     const folder = {
-      name: e.target['folder-name'].value
+      folder_name: e.target['folder-name'].value
     }
     if (folder.name === ""){
       this.setState({errorMessage: "Folder name is required."});
