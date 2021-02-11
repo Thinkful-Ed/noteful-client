@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddNote component renders the complete form 1`] = `
+<section
+  className="AddNote"
+>
+  <h2>
+    Create a note
+  </h2>
+  <NotefulForm>
+    <div
+      className="field"
+    >
+      <label
+        htmlFor="note-name-input"
+      >
+        Name
+      </label>
+      <input
+        id="note-name-input"
+        type="text"
+      />
+    </div>
+    <div
+      className="field"
+    >
+      <label
+        htmlFor="note-content-input"
+      >
+        Content
+      </label>
+      <textarea
+        id="note-content-input"
+      />
+    </div>
+    <div
+      className="field"
+    >
+      <label
+        htmlFor="note-folder-select"
+      >
+        Folder
+      </label>
+      <select
+        id="note-folder-select"
+      >
+        <option
+          value={null}
+        >
+          ...
+        </option>
+      </select>
+    </div>
+    <div
+      className="buttons"
+    >
+      <button
+        type="submit"
+      >
+        Add note
+      </button>
+    </div>
+  </NotefulForm>
+</section>
+`;
+
+exports[`AddNote component renders the select options from folders 1`] = `
+<select
+  id="note-folder-select"
+>
+  <option
+    value={null}
+  >
+    ...
+  </option>
+  <option
+    key="b0715efe-ffaf-11e8-8eb2-f2801f1b9fd1"
+    value="b0715efe-ffaf-11e8-8eb2-f2801f1b9fd1"
+  >
+    Important
+  </option>
+  <option
+    key="b07161a6-ffaf-11e8-8eb2-f2801f1b9fd1"
+    value="b07161a6-ffaf-11e8-8eb2-f2801f1b9fd1"
+  >
+    Super
+  </option>
+  <option
+    key="b07162f0-ffaf-11e8-8eb2-f2801f1b9fd1"
+    value="b07162f0-ffaf-11e8-8eb2-f2801f1b9fd1"
+  >
+    Spangley
+  </option>
+</select>
+`;
